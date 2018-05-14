@@ -12,13 +12,9 @@ module.exports = {
             var creation_time = user_details.creation_time;
           //  console.log("creation time",creation_time);
             var expiry_time = user_details.expiry_time;
-            //console.log("expiry_time",expiry_time);
-            // var specified_time = expiry_time-creation_time;
-            // console.log("specified time",specified_time);
-            //calc
             var current_time = new moment().format("HHmm");
             console.log("current time:",current_time);
-            if(current_time>expiry_time){
+            if(current_time > expiry_time){
                 console.log("token expired");
                 var remove_token = await token.remove({token:request.body.token});
                 console.log("token removed request a new one");
