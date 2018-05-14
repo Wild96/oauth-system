@@ -1,10 +1,10 @@
 const mongoose = require ('mongoose');
 const Schema = mongoose.Schema;
 var authSchema = new Schema ({
-    Username :{
+    UserId :{
         type:String
     },
-    Password:{
+    Username :{
         type:String
     },
     token:{
