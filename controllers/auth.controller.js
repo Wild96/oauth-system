@@ -25,7 +25,7 @@ module.exports = {
                    // console.log("token:", token);
                     var creation_time = new moment().format("HHmm");
                     //console.log("creation time",creation_time);
-                    var expiry_time = new moment().add(5,"m").format("HHmm");   
+                    var expiry_time = new moment().add(1,"m").format("HHmm");   
                     //console.log("expiry_time:",expiry_time); 
                     const tokenmodel = new authorize({
                         Username: request.body.Username,

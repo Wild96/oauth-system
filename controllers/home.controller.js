@@ -13,15 +13,16 @@ module.exports = {
           //  console.log("creation time",creation_time);
             var expiry_time = user_details.expiry_time;
             var current_time = new moment().format("HHmm");
-            console.log("current time:",current_time);
+          //  console.log("current time:",current_time);
             if(current_time > expiry_time){
                 console.log("token expired");
                 var remove_token = await token.remove({token:request.body.token});
                 console.log("token removed request a new one");
+            
             }
             console.log("username",user_details.Username);
             console.log("password:",user_details.Password);
-            return response.status(200).send({ error: false, message: "user details fetched" });
+            return response.status(200);
         }
         catch(e){
             return response.status(500).send({ error:true,message:e.toString() });
