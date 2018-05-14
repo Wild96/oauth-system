@@ -35,7 +35,7 @@ module.exports = {
                         expiry_time:expiry_time
                     });
                    await tokenmodel.save();
-                    return response.redirect(surl.format({
+                    return response.redirect(url.format({
                         pathname: "http://localhost:3000/",
                         query: {
                             "token": token
