@@ -14,38 +14,34 @@ module.exports = {
             if (port == process.env.PORT) {
                 const client = await regapp.findOne({ ClientId: request.body.ClientId });
                 var fetched_Id = client.ClientId;
-              //  console.log("fetched client id:", fetched_Id);
                 const userdetails = await user.findOne({ Username: request.body.Username });
+                //console.log("user details:",userdetails._id);
+                var user_id = userdetails._id;
                 var username = userdetails.Username;
-                var password = userdetails.Password;
-                // console.log("username", username);
-                // console.log("password:", password);
-                if ((username = request.body.Username) && (password = request.body.Password)) {
+
+                if (username = request.body.Username) {
                     var token = randomToken(16);
-                   // console.log("token:", token);
                     var creation_time = new moment().format("HHmm");
-                    //console.log("creation time",creation_time);
-                    var expiry_time = new moment().add(1,"m").format("HHmm");   
-                    //console.log("expiry_time:",expiry_time); 
+                    var expiry_time = new moment().add(10, "m").format("HHmm");
                     const tokenmodel = new authorize({
+                        UserId: user_id,
                         Username: request.body.Username,
-                        Password: request.body.Password,
                         token: token,
-                        creation_time:creation_time,
-                        expiry_time:expiry_time
+                        creation_time: creation_time,
+                        expiry_time: expiry_time
                     });
-                   await tokenmodel.save();
+                    await tokenmodel.save();
                     return response.redirect(url.format({
                         pathname: "http://localhost:3000/",
                         query: {
                             "token": token
                         }
                     }));
-              }
+                }
                 else {
                     console.log("invalid credentials");
                 }
-                
+
             }
             else {
                 console.log("access restricted");
